@@ -1,0 +1,18 @@
+SmartInstallationManager is a Python program that (if set as a cron) will automatically scan the ~/.bash_history file
+for installed packeges. It keeps a running total of these file so that at a later time you can re-install them (this
+program actually does this too!)
+
+Tested (t) and Currently Supported (s) OSes:
+Ubuntu 12.04		ts (Should work for other Ubuntu distros or derivatives using: apt-get install, /etc/issues, and ~/.bash_history
+
+
+Usage:
+
+SmartInstMan.py [-i | -u] -- With no flags, it reads the config file "smartinst.conf" (if it doesn't exist, it will be automatically created)
+			     and parses the history file looking for installed package names and storing them in "smartpack.lst"
+		   -i     -- Installs all files listed in "smartpack.lst"
+		   -u	  -- Does an update of "smartpack.lst" as described above.
+
+The flags --install and --update can be used instead of -i and -u respectively.
+
+Michael Gilliland
