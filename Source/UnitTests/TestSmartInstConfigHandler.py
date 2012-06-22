@@ -11,7 +11,7 @@ import SmartInstConfigHandler
 
 class testSmartInstConfigHandler(unittest.TestCase):
 	def setUp(self):
-		self.beingTested = SmartInstConfigHandler.InstConfigHandler('./smartinst.conf', {'distro':'', 'lastline':''})
+		self.beingTested = SmartInstConfigHandler.InstConfigHandler()
 
 	def test_ConfigFileExistsReturnsTrueIfTheConfigFileIsFound(self):
 		os.system('touch ./smartinst.conf')
@@ -19,6 +19,7 @@ class testSmartInstConfigHandler(unittest.TestCase):
 		os.system('rm ./smartinst.conf')		
 
 	def test_ConfigFileExistsReturnsFalseIfNoFileIsFound(self):
+		os.system('rm ./smartinst.conf')
 		self.assertFalse(self.beingTested.ConfigFileExists())
 
 	def test_GetDistroFromEtcIssueWorks(self):
@@ -26,12 +27,10 @@ class testSmartInstConfigHandler(unittest.TestCase):
 		self.assertTrue(dist in self.beingTested.supportedDistros )
 
 	def test_ParseConfigSetsValuesCorrectly(self):
-		self.beingTested.UpdateConfig()
+		self.beingTested.InitConfig()
 		self.beingTested.ParseConfig()
 		self.assertTrue(self.beingTested.config['distro'] in self.beingTested.supportedDistros)
-		self.assertEqual(self.beingTested.config['lastline'], '0')
                 os.system('rm ./smartinst.conf')
-
 	
 def suite():
 	suite = unittest.TestSuite()
